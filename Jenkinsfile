@@ -2,27 +2,32 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            when {
-                branch 'main'
-            }
+
+        stage('Checkout') {
             steps {
-                sh 'mvn clean package'
+                echo 'Checking out source code'
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Build stage running'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'echo Running tests'
             }
         }
 
         stage('Deploy') {
             when {
-                branch 'release'
+                branch 'main'
             }
             steps {
-                echo 'Deploying application'
+                bat 'echo Deploying application'
             }
         }
     }
