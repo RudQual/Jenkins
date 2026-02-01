@@ -1,2 +1,2 @@
 #!/bin/bash
-mvn clean test
+docker build -t ci-lab .
